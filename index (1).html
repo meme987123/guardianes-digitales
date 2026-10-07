@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -59,56 +59,13 @@
 	<script src="c2runtime.js"></script>
 
     <script>
-		window["c2nodewebkit"] = true;
-		
-		if (typeof nw !== "undefined")
-		{
-			window["nwgui"] = nw;						// NW.js 0.13+
-			
-			if (!window.require)
-			{
-				window.require = function (r)
-				{
-					return nw.require(r);
-				};
-			}
-		}
-		else
-		{
-			window["nwgui"] = require("nw.gui");		// NW.js 0.12.x and older
-		}
-		
-		// Uncomment to show dev tools on startup
-		//window["nwgui"].Window.get().showDevTools();
-		
-		// Start the Construct 2 project running on window load.
-		jQuery(document).ready(function ()
-		{			
-			// Create new runtime using the c2canvas
-			cr_createRuntime("c2canvas");
-			
-			window["nwgui"].Window.get().show();
-		});
-		
-		// Pause and resume on page becoming visible/invisible
-		function onVisibilityChanged() {
-			if (document.hidden || document.mozHidden || document.webkitHidden || document.msHidden)
-				cr_setSuspended(true);
-			else
-				cr_setSuspended(false);
-		};
-		
-		document.addEventListener("visibilitychange", onVisibilityChanged, false);
-		document.addEventListener("mozvisibilitychange", onVisibilityChanged, false);
-		document.addEventListener("webkitvisibilitychange", onVisibilityChanged, false);
-		document.addEventListener("msvisibilitychange", onVisibilityChanged, false);
-		
-		// Work around NWjs ghost process bug
-		var win = window['nwgui'].Window.get();
-		win.on('close', function () {
-			window['nwgui'].App.quit();
-		});
-		
-    </script>
+window["c2nodewebkit"] = false;
+jQuery(document).ready(function () { cr_createRuntime("c2canvas"); });
+function onVisibilityChanged(){ if(document.hidden||document.mozHidden||document.webkitHidden||document.msHidden) cr_setSuspended(true); else cr_setSuspended(false); }
+document.addEventListener("visibilitychange",onVisibilityChanged,false);
+document.addEventListener("mozvisibilitychange",onVisibilityChanged,false);
+document.addEventListener("webkitvisibilitychange",onVisibilityChanged,false);
+document.addEventListener("msvisibilitychange",onVisibilityChanged,false);
+</script>
 </body> 
 </html> 
